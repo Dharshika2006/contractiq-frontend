@@ -29,12 +29,12 @@ export default function SummaryPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-12">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-semibold text-slate-900">AI Summary</h1>
           <p className="text-slate-500 text-sm">{contract.name.replace(".pdf", "")} — auto-generated plain-English analysis</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <button 
             onClick={handleCopy}
             className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 text-slate-600 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-all duration-200 shadow-sm"
@@ -57,7 +57,7 @@ export default function SummaryPage() {
       </div>
 
       {loading ? (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-12 flex flex-col items-center justify-center space-y-4">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8 sm:p-12 flex flex-col items-center justify-center space-y-4">
           <div className="w-12 h-12 rounded-full bg-violet-50 flex items-center justify-center">
             <Loader2 className="w-6 h-6 text-violet-600 animate-spin" />
           </div>
@@ -71,15 +71,15 @@ export default function SummaryPage() {
           
           {/* Executive Summary */}
           {summary.executiveSummary && (
-            <div className="p-8 border-b border-slate-100 bg-slate-50/50">
+            <div className="p-5 sm:p-8 border-b border-slate-100 bg-slate-50/50">
               <h3 className="text-xs font-bold text-slate-400 tracking-wider mb-3 uppercase">Executive Summary</h3>
-              <p className="text-slate-700 text-base leading-relaxed font-medium">
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
                 {summary.executiveSummary}
               </p>
             </div>
           )}
 
-          <div className="p-8 space-y-12">
+          <div className="p-5 sm:p-8 space-y-12">
             {/* Key Obligations */}
             <div>
               <h3 className="text-xs font-bold text-slate-400 tracking-wider mb-4 uppercase">Key Obligations</h3>
@@ -96,7 +96,7 @@ export default function SummaryPage() {
             {/* Key Deadlines */}
             <div>
               <h3 className="text-xs font-bold text-slate-400 tracking-wider mb-4 uppercase">Key Deadlines</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {summary.deadlines.map((deadline) => (
                     <div 
                       key={deadline.id} 
@@ -106,10 +106,10 @@ export default function SummaryPage() {
                           : "bg-slate-50/50 border-slate-100"
                       }`}
                     >
-                      <Clock className={`w-4 h-4 mt-0.5 ${deadline.isCritical ? "text-amber-500" : "text-slate-400"}`} />
+                      <Clock className={`w-4 h-4 mt-0.5 shrink-0 ${deadline.isCritical ? "text-amber-500" : "text-slate-400"}`} />
                       <div>
                         <p className="text-xs text-slate-500 mb-1 font-medium">{deadline.title}</p>
-                        <p className={`font-bold ${deadline.isCritical ? "text-amber-700" : "text-slate-800"}`}>
+                        <p className={`font-bold text-sm ${deadline.isCritical ? "text-amber-700" : "text-slate-800"}`}>
                           {deadline.date}
                         </p>
                       </div>
@@ -118,13 +118,13 @@ export default function SummaryPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Financial Commitments */}
               <div>
                 <h3 className="text-xs font-bold text-slate-400 tracking-wider mb-4 uppercase">Financial Commitments</h3>
                 <div className="space-y-0">
                   {summary.financialCommitments.map((fin) => (
-                    <div key={fin.id} className="flex justify-between py-3 border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-colors px-2 rounded -mx-2">
+                    <div key={fin.id} className="flex flex-wrap gap-2 justify-between py-3 border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-colors px-2 rounded -mx-2">
                       <span className="text-slate-700 text-sm">{fin.name}</span>
                       <span className="font-bold text-slate-900 text-sm">{fin.value}</span>
                     </div>
@@ -139,8 +139,8 @@ export default function SummaryPage() {
                   <ul className="space-y-3">
                     {summary.renewalTerms.map((term, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <span className="text-slate-400 mt-0.5">•</span>
-                        <span className="text-slate-700 text-sm">{term}</span>
+                        <span className="text-slate-400 mt-0.5 shrink-0">•</span>
+                        <span className="text-slate-700 text-sm leading-relaxed">{term}</span>
                       </li>
                     ))}
                   </ul>
@@ -148,7 +148,7 @@ export default function SummaryPage() {
               )}
             </div>
 
-            <div className="grid grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Termination Conditions */}
               {summary.terminationConditions && (
                 <div>

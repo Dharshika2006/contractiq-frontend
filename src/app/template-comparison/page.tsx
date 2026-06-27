@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { AlertOctagon } from "lucide-react";
 import { mockContracts } from "@/data/mockData";
 
 export default function TemplateComparisonPage() {
   const contract = mockContracts[0];
   const comparisons = contract.comparisons || [];
+  
+  const [mobileView, setMobileView] = useState<"template" | "contract">("contract");
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-12">
@@ -16,21 +18,45 @@ export default function TemplateComparisonPage() {
       </div>
 
       <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-center gap-3 shadow-sm">
-        <AlertOctagon className="w-5 h-5 text-amber-500" />
+        <AlertOctagon className="w-5 h-5 text-amber-500 shrink-0" />
         <p className="text-amber-800 text-sm">
           <strong>{comparisons.length} deviations found</strong> against the standard <em>SaaS Vendor Agreement Template</em>. Highlighted differences indicate non-standard language.
         </p>
       </div>
 
+      {/* Mobile Toggle Control */}
+      <div className="md:hidden flex p-1 bg-slate-100 rounded-xl mb-4">
+        <button
+          onClick={() => setMobileView("contract")}
+          className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+            mobileView === "contract"
+              ? "bg-white text-slate-900 shadow-sm border border-slate-200/50"
+              : "text-slate-500 hover:text-slate-700"
+          }`}
+        >
+          User Report
+        </button>
+        <button
+          onClick={() => setMobileView("template")}
+          className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+            mobileView === "template"
+              ? "bg-white text-slate-900 shadow-sm border border-slate-200/50"
+              : "text-slate-500 hover:text-slate-700"
+          }`}
+        >
+          Approved Template
+        </button>
+      </div>
+
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 border-b border-slate-200 bg-slate-50/50">
-          <div className="p-4 border-b md:border-b-0 md:border-r border-slate-200">
+          <div className={`p-4 border-b md:border-b-0 md:border-r border-slate-200 ${mobileView === "template" ? "block" : "hidden md:block"}`}>
             <h3 className="font-semibold text-emerald-600 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               Approved Template
             </h3>
           </div>
-          <div className="p-4">
+          <div className={`p-4 ${mobileView === "contract" ? "block" : "hidden md:block"}`}>
             <h3 className="font-semibold text-slate-600 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-slate-400"></span>
               Current Contract: {contract.name.replace(".pdf", "")}
@@ -57,7 +83,7 @@ export default function TemplateComparisonPage() {
             return (
               <div key={comp.id} className="grid grid-cols-1 md:grid-cols-2">
                 {/* Left Column (Template) */}
-                <div className="p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200 space-y-3">
+                <div className={`p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200 space-y-3 ${mobileView === "template" ? "block" : "hidden md:block"}`}>
                   <div className="flex items-center gap-3">
                     <h4 className="font-medium text-slate-700">{comp.clauseName}</h4>
                   </div>
@@ -67,7 +93,7 @@ export default function TemplateComparisonPage() {
                 </div>
                 
                 {/* Right Column (Contract) */}
-                <div className="p-4 sm:p-6 space-y-3">
+                <div className={`p-4 sm:p-6 space-y-3 ${mobileView === "contract" ? "block" : "hidden md:block"}`}>
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <h4 className="font-medium text-slate-900">{comp.clauseName}</h4>
                     <span className={`px-2.5 py-1 text-xs font-semibold rounded border ${badgeColors}`}>

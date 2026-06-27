@@ -53,14 +53,14 @@ export default function ClauseAnalysisPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-12">
       {/* Header Card */}
-      <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex items-start justify-between">
-        <div className="flex items-start gap-5">
-          <div className="w-12 h-12 bg-blue-50/50 text-[#2563eb] rounded-xl flex items-center justify-center shrink-0 border border-blue-200/60 mt-1">
+      <div className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 shadow-sm flex flex-col md:flex-row md:items-start justify-between gap-6">
+        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
+          <div className="w-12 h-12 bg-blue-50/50 text-[#2563eb] rounded-xl flex items-center justify-center shrink-0 border border-blue-200/60 sm:mt-1">
             <FileText className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 mb-2">{contract.name.replace(".pdf", "")}</h1>
-            <div className="flex items-center gap-8 text-sm">
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-2">{contract.name.replace(".pdf", "")}</h1>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-8 text-sm">
               <div>
                 <span className="text-slate-400 block mb-0.5">Counterparty:</span>
                 <span className="text-slate-700 font-medium">{contract.counterparty}</span>
@@ -81,8 +81,8 @@ export default function ClauseAnalysisPage() {
           </div>
         </div>
         
-        <div className="flex items-center gap-6">
-          <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-4 sm:gap-6 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-zinc-100">
+          <div className="flex flex-col items-center gap-1 w-full sm:w-auto">
             <span className="text-xs text-slate-400 font-medium">Overall Risk</span>
             <div className="flex items-center gap-2">
               <RiskBadge level={contract.overallRisk} />
@@ -90,16 +90,16 @@ export default function ClauseAnalysisPage() {
             </div>
           </div>
           
-          <div className="flex items-center gap-3 border-l border-zinc-200 pl-6">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:border-l sm:border-zinc-200 sm:pl-6 w-full sm:w-auto">
             <button 
               onClick={() => router.push("/summary")}
-              className="flex items-center gap-2 bg-violet-50 hover:bg-violet-100 text-violet-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors border border-violet-200/60 shadow-sm"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-violet-50 hover:bg-violet-100 text-violet-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors border border-violet-200/60 shadow-sm"
             >
               <Sparkles className="w-4 h-4" /> AI Summary
             </button>
             <button 
               onClick={() => router.push("/template-comparison")}
-              className="flex items-center gap-2 bg-white hover:bg-zinc-50 text-zinc-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors border border-zinc-200 shadow-sm"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 text-zinc-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors border border-zinc-200 shadow-sm"
             >
               <SplitSquareHorizontal className="w-4 h-4" /> Compare Template
             </button>
@@ -108,20 +108,20 @@ export default function ClauseAnalysisPage() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-        <div className="flex gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div className="flex flex-wrap gap-2">
           {filters.map(f => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors flex items-center gap-2 border ${
+              className={`px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 border ${
                 activeFilter === f 
                   ? 'bg-zinc-800 border-zinc-800 text-white shadow-sm' 
                   : 'bg-white border-zinc-200 text-zinc-600 hover:bg-zinc-50'
               }`}
             >
               {f}
-              <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+              <span className={`px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold ${
                 activeFilter === f ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
               }`}>
                 {riskCounts[f as keyof typeof riskCounts]}
@@ -129,7 +129,7 @@ export default function ClauseAnalysisPage() {
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+        <div className="flex items-center gap-2 text-slate-500 text-sm font-medium w-full sm:w-auto">
           <Filter className="w-4 h-4" />
           <span>{contract.clausesCount} clauses</span>
         </div>
@@ -145,26 +145,26 @@ export default function ClauseAnalysisPage() {
           {filteredClauses.map((clause) => (
             <div 
               key={clause.id} 
-              className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 overflow-hidden cursor-pointer group p-6"
+              className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 overflow-hidden cursor-pointer group p-4 sm:p-6"
               onClick={() => setSelectedClauseId(clause.id)}
             >
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <h3 className="text-lg font-bold text-slate-800">{clause.name}</h3>
+              <div className="flex flex-wrap items-start justify-between gap-4 mb-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-800 w-full sm:w-auto mb-1 sm:mb-0">{clause.name}</h3>
                   <RiskBadge level={clause.riskLevel} />
-                  <span className="px-2.5 py-1 bg-slate-50 text-slate-600 border border-slate-200 rounded text-xs font-semibold">
+                  <span className="px-2 py-1 bg-slate-50 text-slate-600 border border-slate-200 rounded text-[10px] sm:text-xs font-semibold">
                     {clause.confidenceLevel} conf.
                   </span>
                   {clause.status === "Confirmed" ? (
-                    <span className="px-2.5 py-1 bg-teal-50 text-teal-700 border border-teal-200/60 rounded text-xs font-semibold flex items-center gap-1.5">
+                    <span className="px-2 py-1 bg-teal-50 text-teal-700 border border-teal-200/60 rounded text-[10px] sm:text-xs font-semibold flex items-center gap-1.5">
                       ✓ Confirmed
                     </span>
                   ) : clause.status === "Needs Review" ? (
-                    <span className="px-2.5 py-1 bg-amber-50 text-amber-700 border border-amber-200/60 rounded text-xs font-semibold flex items-center gap-1.5">
+                    <span className="px-2 py-1 bg-amber-50 text-amber-700 border border-amber-200/60 rounded text-[10px] sm:text-xs font-semibold flex items-center gap-1.5">
                       ● Needs Review
                     </span>
                   ) : (
-                    <span className="px-2.5 py-1 bg-zinc-50 text-zinc-600 border border-zinc-200 rounded text-xs font-semibold flex items-center gap-1.5">
+                    <span className="px-2 py-1 bg-zinc-50 text-zinc-600 border border-zinc-200 rounded text-[10px] sm:text-xs font-semibold flex items-center gap-1.5">
                       ✧ AI-Suggested
                     </span>
                   )}

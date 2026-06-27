@@ -14,6 +14,7 @@ export default function ComparisonPage() {
   const [versionB, setVersionB] = useState("v2.0 (Executed)");
   const [showDropdownA, setShowDropdownA] = useState(false);
   const [showDropdownB, setShowDropdownB] = useState(false);
+  const [mobileView, setMobileView] = useState<"versionA" | "versionB">("versionB");
 
   const versions = [
     "v1.0 (Initial Draft)",
@@ -37,9 +38,33 @@ export default function ComparisonPage() {
         </p>
       </div>
 
+      {/* Mobile Toggle Control */}
+      <div className="md:hidden flex p-1 bg-slate-100 rounded-xl mb-4">
+        <button
+          onClick={() => setMobileView("versionA")}
+          className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+            mobileView === "versionA"
+              ? "bg-white text-slate-900 shadow-sm border border-slate-200/50"
+              : "text-slate-500 hover:text-slate-700"
+          }`}
+        >
+          Version A
+        </button>
+        <button
+          onClick={() => setMobileView("versionB")}
+          className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+            mobileView === "versionB"
+              ? "bg-white text-slate-900 shadow-sm border border-slate-200/50"
+              : "text-slate-500 hover:text-slate-700"
+          }`}
+        >
+          Version B
+        </button>
+      </div>
+
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 border-b border-slate-200 bg-slate-50/50">
-          <div className="p-4 border-b md:border-b-0 md:border-r border-slate-200 flex items-center justify-between relative">
+          <div className={`p-4 border-b md:border-b-0 md:border-r border-slate-200 flex items-center justify-between relative ${mobileView === "versionA" ? "block" : "hidden md:flex"}`}>
             <h3 className="font-semibold text-slate-600 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-slate-400"></span>
               Version A
@@ -49,8 +74,8 @@ export default function ComparisonPage() {
                 onClick={() => { setShowDropdownA(!showDropdownA); setShowDropdownB(false); }}
                 className="flex items-center gap-2 text-sm font-medium text-slate-700 bg-white border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition-colors"
               >
-                {versionA}
-                <ChevronDown className="w-4 h-4 text-slate-400" />
+                <span className="truncate max-w-[120px] sm:max-w-none">{versionA}</span>
+                <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
               </button>
               {showDropdownA && (
                 <div className="absolute right-0 top-full mt-1 w-48 bg-white border border-slate-200 rounded-lg shadow-lg py-1 z-10">
@@ -67,7 +92,7 @@ export default function ComparisonPage() {
               )}
             </div>
           </div>
-          <div className="p-4 flex items-center justify-between relative">
+          <div className={`p-4 flex items-center justify-between relative ${mobileView === "versionB" ? "block" : "hidden md:flex"}`}>
             <h3 className="font-semibold text-blue-600 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-blue-500"></span>
               Version B
@@ -77,8 +102,8 @@ export default function ComparisonPage() {
                 onClick={() => { setShowDropdownB(!showDropdownB); setShowDropdownA(false); }}
                 className="flex items-center gap-2 text-sm font-medium text-blue-700 bg-blue-50 border border-blue-200/60 px-3 py-1.5 rounded-lg hover:bg-blue-100/50 transition-colors"
               >
-                {versionB}
-                <ChevronDown className="w-4 h-4 text-blue-400" />
+                <span className="truncate max-w-[120px] sm:max-w-none">{versionB}</span>
+                <ChevronDown className="w-4 h-4 text-blue-400 shrink-0" />
               </button>
               {showDropdownB && (
                 <div className="absolute right-0 top-full mt-1 w-48 bg-white border border-slate-200 rounded-lg shadow-lg py-1 z-10">
@@ -107,8 +132,8 @@ export default function ComparisonPage() {
             return (
               <div key={comp.id} className="grid grid-cols-1 md:grid-cols-2">
                 {/* Left Column (Original) */}
-                <div className={`p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200 space-y-3 ${isAdded ? "bg-slate-50/50" : ""}`}>
-                  <div className="flex items-center gap-3">
+                <div className={`p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200 space-y-3 ${isAdded ? "bg-slate-50/50" : ""} ${mobileView === "versionA" ? "block" : "hidden md:block"}`}>
+                  <div className="flex flex-wrap items-center gap-3">
                     <h4 className={`font-medium ${isAdded ? "text-slate-300" : "text-slate-500"}`}>{comp.clauseName}</h4>
                     {isUnchanged && (
                       <span className="px-2 py-0.5 bg-slate-50 text-slate-500 text-xs font-medium rounded border border-slate-200">
@@ -131,7 +156,7 @@ export default function ComparisonPage() {
                 </div>
                 
                 {/* Right Column (Current) */}
-                <div className={`p-4 sm:p-6 space-y-3 ${isRemoved ? "bg-slate-50/50" : ""}`}>
+                <div className={`p-4 sm:p-6 space-y-3 ${isRemoved ? "bg-slate-50/50" : ""} ${mobileView === "versionB" ? "block" : "hidden md:block"}`}>
                   <div className="flex flex-wrap items-center gap-3">
                     <h4 className={`font-medium ${isRemoved ? "text-slate-300" : "text-slate-700"}`}>{comp.clauseName}</h4>
                     {isModified && (
