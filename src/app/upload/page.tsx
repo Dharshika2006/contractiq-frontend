@@ -114,39 +114,39 @@ export default function UploadPage() {
       </div>
 
       {/* Upload Area */}
-      <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm p-8 space-y-6">
+      <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm p-5 sm:p-8 space-y-6">
         
         {uploadState === "idle" && (
           <div 
             {...getRootProps()} 
-            className={`border-2 border-dashed rounded-xl p-10 text-center transition-all duration-200 ${
+            className={`max-w-xl mx-auto w-full border-2 border-dashed rounded-xl p-6 sm:p-10 text-center transition-all duration-200 ${
               isDragActive 
                 ? "border-[#2563eb] bg-blue-50/50" 
                 : "border-zinc-200 bg-zinc-50/50 hover:border-blue-300 hover:bg-zinc-100/50"
             }`}
           >
             <input {...getInputProps()} />
-            <div className="w-14 h-14 bg-white text-slate-600 rounded-xl flex items-center justify-center mx-auto mb-5 border border-slate-100 shadow-sm">
-              <Upload className="w-6 h-6 text-[#2563eb]" />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white text-slate-600 rounded-xl flex items-center justify-center mx-auto mb-4 sm:mb-5 border border-slate-100 shadow-sm">
+              <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-[#2563eb]" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-1">
+            <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-1">
               {isDragActive ? "Drop the files here" : "Drop your contract here"}
             </h3>
-            <p className="text-slate-500 text-sm mb-6">
+            <p className="text-slate-500 text-xs sm:text-sm mb-5 sm:mb-6 px-4">
               or click below to browse — PDF, DOCX up to 50MB
             </p>
             <button 
               onClick={open}
-              className="px-6 py-2.5 bg-white border border-slate-200 text-slate-700 hover:text-[#2563eb] hover:border-blue-200 hover:bg-blue-50 font-semibold rounded-lg text-sm transition-all duration-200 shadow-sm"
+              className="px-5 sm:px-6 py-2 sm:py-2.5 bg-white border border-slate-200 text-slate-700 hover:text-[#2563eb] hover:border-blue-200 hover:bg-blue-50 font-semibold rounded-lg text-xs sm:text-sm transition-all duration-200 shadow-sm"
             >
               Select File
             </button>
             
-            <div className="flex items-center justify-center gap-4 text-xs font-medium text-slate-400 mt-6">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-xs font-medium text-slate-400 mt-5 sm:mt-6">
               <span className="flex items-center gap-1.5"><FileText className="w-3.5 h-3.5" /> PDF</span>
-              <span>•</span>
+              <span className="hidden sm:inline">•</span>
               <span className="flex items-center gap-1.5"><FileText className="w-3.5 h-3.5" /> DOCX</span>
-              <span>•</span>
+              <span className="hidden sm:inline">•</span>
               <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" /> OCR supported</span>
             </div>
           </div>

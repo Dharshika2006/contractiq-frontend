@@ -38,8 +38,8 @@ export default function ComparisonPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="grid grid-cols-2 border-b border-slate-200 bg-slate-50/50">
-          <div className="p-4 border-r border-slate-200 flex items-center justify-between relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 border-b border-slate-200 bg-slate-50/50">
+          <div className="p-4 border-b md:border-b-0 md:border-r border-slate-200 flex items-center justify-between relative">
             <h3 className="font-semibold text-slate-600 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-slate-400"></span>
               Version A
@@ -105,9 +105,9 @@ export default function ComparisonPage() {
             const isUnchanged = comp.status === "Unchanged";
 
             return (
-              <div key={comp.id} className="grid grid-cols-2">
+              <div key={comp.id} className="grid grid-cols-1 md:grid-cols-2">
                 {/* Left Column (Original) */}
-                <div className={`p-6 border-r border-slate-200 space-y-3 ${isAdded ? "bg-slate-50/50" : ""}`}>
+                <div className={`p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200 space-y-3 ${isAdded ? "bg-slate-50/50" : ""}`}>
                   <div className="flex items-center gap-3">
                     <h4 className={`font-medium ${isAdded ? "text-slate-300" : "text-slate-500"}`}>{comp.clauseName}</h4>
                     {isUnchanged && (
@@ -131,8 +131,8 @@ export default function ComparisonPage() {
                 </div>
                 
                 {/* Right Column (Current) */}
-                <div className={`p-6 space-y-3 ${isRemoved ? "bg-slate-50/50" : ""}`}>
-                  <div className="flex items-center gap-3">
+                <div className={`p-4 sm:p-6 space-y-3 ${isRemoved ? "bg-slate-50/50" : ""}`}>
+                  <div className="flex flex-wrap items-center gap-3">
                     <h4 className={`font-medium ${isRemoved ? "text-slate-300" : "text-slate-700"}`}>{comp.clauseName}</h4>
                     {isModified && (
                       <span className="px-2 py-0.5 bg-amber-50 text-amber-600 text-xs font-medium rounded border border-amber-100">

@@ -23,8 +23,8 @@ export default function TemplateComparisonPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="grid grid-cols-2 border-b border-slate-200 bg-slate-50/50">
-          <div className="p-4 border-r border-slate-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 border-b border-slate-200 bg-slate-50/50">
+          <div className="p-4 border-b md:border-b-0 md:border-r border-slate-200">
             <h3 className="font-semibold text-emerald-600 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               Approved Template
@@ -55,9 +55,9 @@ export default function TemplateComparisonPage() {
                 : "bg-transparent border-transparent text-slate-600 px-0 py-0";
 
             return (
-              <div key={comp.id} className="grid grid-cols-2">
+              <div key={comp.id} className="grid grid-cols-1 md:grid-cols-2">
                 {/* Left Column (Template) */}
-                <div className="p-6 border-r border-slate-200 space-y-3">
+                <div className="p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200 space-y-3">
                   <div className="flex items-center gap-3">
                     <h4 className="font-medium text-slate-700">{comp.clauseName}</h4>
                   </div>
@@ -67,8 +67,8 @@ export default function TemplateComparisonPage() {
                 </div>
                 
                 {/* Right Column (Contract) */}
-                <div className="p-6 space-y-3">
-                  <div className="flex items-center justify-between">
+                <div className="p-4 sm:p-6 space-y-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
                     <h4 className="font-medium text-slate-900">{comp.clauseName}</h4>
                     <span className={`px-2.5 py-1 text-xs font-semibold rounded border ${badgeColors}`}>
                       {comp.deviationType}

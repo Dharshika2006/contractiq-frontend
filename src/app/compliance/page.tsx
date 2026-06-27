@@ -173,17 +173,17 @@ export default function CompliancePage() {
         <h3 className="text-sm font-semibold text-slate-800 mb-4">Compliance Issues Summary</h3>
         <div className="space-y-3">
           {/* Issue 1 */}
-          <div className="bg-white border border-zinc-200/60 rounded-xl p-5 flex items-start gap-4 shadow-sm">
+          <div className="bg-white border border-zinc-200/60 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start gap-3 sm:gap-4 shadow-sm">
             <div className="shrink-0 pt-0.5">
-              <span className="px-2.5 py-1 bg-violet-50 text-violet-700 rounded text-[10px] font-bold border border-violet-200/60 flex items-center gap-1.5 uppercase tracking-wider">
+              <span className="px-2.5 py-1 bg-violet-50 text-violet-700 rounded text-[10px] font-bold border border-violet-200/60 flex items-center gap-1.5 uppercase tracking-wider w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-violet-500"></span>
                 Critical
               </span>
             </div>
             <div>
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
                 <h4 className="font-bold text-slate-900 text-sm">Meridian SaaS License</h4>
-                <div className="flex gap-1.5">
+                <div className="flex gap-1.5 flex-wrap">
                   <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">GDPR</span>
                   <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">CCPA</span>
                 </div>
@@ -195,17 +195,17 @@ export default function CompliancePage() {
           </div>
 
           {/* Issue 2 */}
-          <div className="bg-white border border-zinc-200/60 rounded-xl p-5 flex items-start gap-4 shadow-sm">
+          <div className="bg-white border border-zinc-200/60 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start gap-3 sm:gap-4 shadow-sm">
             <div className="shrink-0 pt-0.5">
-              <span className="px-2.5 py-1 bg-orange-50 text-orange-700 rounded text-[10px] font-bold border border-orange-200/60 flex items-center gap-1.5 uppercase tracking-wider">
+              <span className="px-2.5 py-1 bg-orange-50 text-orange-700 rounded text-[10px] font-bold border border-orange-200/60 flex items-center gap-1.5 uppercase tracking-wider w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                 High
               </span>
             </div>
             <div>
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
                 <h4 className="font-bold text-slate-900 text-sm">BrightPath Partnership</h4>
-                <div className="flex gap-1.5">
+                <div className="flex gap-1.5 flex-wrap">
                   <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">GDPR</span>
                 </div>
               </div>
@@ -216,17 +216,17 @@ export default function CompliancePage() {
           </div>
 
           {/* Issue 3 */}
-          <div className="bg-white border border-zinc-200/60 rounded-xl p-5 flex items-start gap-4 shadow-sm">
+          <div className="bg-white border border-zinc-200/60 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start gap-3 sm:gap-4 shadow-sm">
             <div className="shrink-0 pt-0.5">
-              <span className="px-2.5 py-1 bg-orange-50 text-orange-700 rounded text-[10px] font-bold border border-orange-200/60 flex items-center gap-1.5 uppercase tracking-wider">
+              <span className="px-2.5 py-1 bg-orange-50 text-orange-700 rounded text-[10px] font-bold border border-orange-200/60 flex items-center gap-1.5 uppercase tracking-wider w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                 High
               </span>
             </div>
             <div>
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
                 <h4 className="font-bold text-slate-900 text-sm">Ironwood Procurement</h4>
-                <div className="flex gap-1.5">
+                <div className="flex gap-1.5 flex-wrap">
                   <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">PCI DSS</span>
                 </div>
               </div>

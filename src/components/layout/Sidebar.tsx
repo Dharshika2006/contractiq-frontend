@@ -15,7 +15,8 @@ import {
   ShieldCheck, 
   Settings,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  X
 } from "lucide-react";
 
 interface SidebarProps {
@@ -23,13 +24,17 @@ interface SidebarProps {
   setIsCollapsed: (collapsed: boolean) => void;
   activeRole: "Counsel" | "Admin";
   setActiveRole: (role: "Counsel" | "Admin") => void;
+  isMobileMenuOpen?: boolean;
+  setIsMobileMenuOpen?: (open: boolean) => void;
 }
 
 export default function Sidebar({ 
   isCollapsed, 
   setIsCollapsed, 
   activeRole, 
-  setActiveRole 
+  setActiveRole,
+  isMobileMenuOpen,
+  setIsMobileMenuOpen 
 }: SidebarProps) {
   const pathname = usePathname();
 
@@ -47,8 +52,10 @@ export default function Sidebar({
 
   return (
     <aside 
-      className={`bg-[#0f172a] border-r border-slate-800/50 text-slate-100 flex flex-col justify-between transition-all duration-200 z-30 h-screen sticky top-0 ${
+      className={`bg-[#0f172a] border-r border-slate-800/50 text-slate-100 flex flex-col justify-between transition-transform duration-300 z-50 h-screen fixed inset-y-0 left-0 md:relative md:translate-x-0 ${
         isCollapsed ? "w-20" : "w-64"
+      } ${
+        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
       }`}
     >
       {/* Top Brand Logo Section */}
@@ -66,12 +73,24 @@ export default function Sidebar({
             </div>
           )}
         </div>
+        
+        {/* Desktop Collapse Toggle */}
         <button 
           onClick={() => setIsCollapsed(!isCollapsed)} 
-          className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 transition-colors"
+          className="hidden md:block text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 transition-colors"
         >
           {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
         </button>
+
+        {/* Mobile Close Button */}
+        {setIsMobileMenuOpen && (
+          <button 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="md:hidden text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 transition-colors"
+          >
+            <X size={20} />
+          </button>
+        )}
       </div>
 
       {/* Role Toggle Switcher */}
@@ -114,6 +133,9 @@ export default function Sidebar({
             <Link 
               key={item.href}
               href={item.href}
+              onClick={() => {
+                if (setIsMobileMenuOpen) setIsMobileMenuOpen(false);
+              }}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group cursor-pointer ${
                 isActive 
                   ? "bg-[#2563eb] text-white shadow-sm" 
