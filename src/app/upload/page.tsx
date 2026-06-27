@@ -267,16 +267,16 @@ export default function UploadPage() {
           </div>
           <div className="divide-y divide-slate-100">
             {mockContracts.slice(0, 3).map((contract) => (
-              <div key={contract.id} className="p-4 flex items-center justify-between hover:bg-slate-50/50 transition-colors">
-                <div className="flex items-center gap-3">
-                  <FileText className="w-5 h-5 text-slate-400" />
-                  <span className="font-medium text-slate-700 text-sm">{contract.name.replace(".pdf", "")}</span>
-                </div>
-                <div className="flex items-center gap-6">
-                  <span className="text-sm text-slate-400">{contract.effectiveDate}</span>
-                  <div className="w-24 flex justify-end">
-                    <RiskBadge level={contract.overallRisk} />
+              <div key={contract.id} className="p-4 flex items-start sm:items-center justify-between gap-4 hover:bg-slate-50/50 transition-colors">
+                <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                  <FileText className="w-5 h-5 text-slate-400 shrink-0 sm:mt-0 mt-0.5" />
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full min-w-0 gap-1 sm:gap-6">
+                    <span className="font-medium text-slate-700 text-sm truncate block">{contract.name.replace(".pdf", "")}</span>
+                    <span className="text-xs sm:text-sm text-slate-400 shrink-0">{contract.effectiveDate}</span>
                   </div>
+                </div>
+                <div className="w-auto sm:w-24 flex justify-end shrink-0">
+                  <RiskBadge level={contract.overallRisk} />
                 </div>
               </div>
             ))}
